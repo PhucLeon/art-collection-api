@@ -4,7 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
-// const bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 
 // FOR ROUTER IMPORT
 const userRoute = require("./routes/user");
@@ -21,10 +21,17 @@ mongoose.connect(process.env.MONGODB_URL, () => {
   console.log("Connected to MongoDB!");
 });
 
-// app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 5000,
+  })
+);
 
 // app.get("/", function (req, res) {
 //   res.cookie("refreshToken", "xxxx", {
