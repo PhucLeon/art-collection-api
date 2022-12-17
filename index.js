@@ -6,6 +6,8 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
+
+const PORT = process.env.PORT;
 // FOR ROUTER IMPORT
 const userRoute = require("./routes/user");
 const artRoute = require("./routes/art");
@@ -51,6 +53,6 @@ app.use("/v1/booking", bookingRoute);
 app.use("/v1/auth", authRoute);
 
 
-app.listen(8000, () => {
+app.listen(PORT || 8000, () => {
   console.log("Server is running...");
 });
